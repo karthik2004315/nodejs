@@ -115,3 +115,114 @@ require('./add.js')
 |path| provides utility functions to working with file paths|
 |http| this is most important and this is used to creat servers|
 
+### OS module
+
+* The OS Module (as its name implies) provides you methods/functions with which you can get information about your Operating System.
+* first to import the module. we have to write this code
+```
+const os = require('os');
+```
+* some important functions of **OS module**. check the below code carefullu
+```
+const os = require('os')
+
+// os.uptime()
+const systemUptime = os.uptime();
+
+// os.userInfo()
+const userInfo = os.userInfo();
+
+// We will store some other information about my WindowsOS in this object:
+const otherInfo = {
+    name: os.type(),
+    release: os.release(),
+    totalMem: os.totalmem(),
+    freeMem: os.freemem(),
+}
+
+// Let's Check The Results:
+console.log(systemUptime);
+console.log(userInfo);
+console.log(otherInfo);
+
+```
+
+* The output of code will be like this
+```
+2323232
+{
+	uid: -1,
+	gid: -1,
+	username: 'kalrthik',
+	homedir: 'D://node',
+	shell: null
+}
+{
+	name: 'Windows_NT',
+	release: '10.0.22621',
+	totalMem: 8215212032,
+	freeMem: 1082208256
+}
+
+```
+* **os.uptime()**: this is gives the uptime of our system in seconds
+* **os.userInfo()**: this is the information about the current user and it gives the whole information
+* **os.type()**: this tells us the name of operating system
+* **os.release()**: tells the release version of operating system
+* **os.totalMem()**: tells the total memory of the system
+* **ps.freeMem()**: tells the free memory of the system
+
+------------------------------------------------------------------------------------------------------------------
+#### the Path Module
+
+* The PATH module comes in handy while working with file and directory paths. 
+* once see the below code
+```
+const path = require('path')
+
+// Assigning a path to the myPath variable
+const myPath = '/d/nodejs'
+
+const pathInfo = {
+    fileName: path.basename(myPath),
+    folderName: path.dirname(myPath),
+    fileExtension: path.extname(myPath),
+    absoluteOrNot: path.isAbsolute(myPath),
+    detailInfo: path.parse(myPath),
+}
+
+// Let's See The Results:
+console.log(pathInfo);
+```
+
+* `path.basename(<arg>)`: this function accepts the path and return the last part of the path.
+* `path.dirname(<arg>)` : this function takes the path as argument and it returns the the folder of the last part of path
+* `path.sep`            : sep is a variable which contains the system specific path separator. For Windows machine: console.log(path.sep) prints \ in the console while in case of macOS or Linux, path.sep returns a forward slash ( / ).
+4
+* `path.join(<paths>)`  : The path.join() function accepts path(s) as strings. It then joins those paths using the system specific path separator and returns the joined path.
+* `path.resolve(<paths>)` : This function works in a similar way as compared to path.join(). The path.resolve() function just joins the different paths provided to it using the system specific path separator and then appends the final output to the absolute path of the present working directory.
+
+#### File system module
+
+* This module helps you with file handling operations such as:
+1. reading a file( sync and async way)
+2. writing a file( sync and async way)
+3. deleting a file
+4. renaming a file
+
+* one basic command is `fs.mkdir()`. it is used to create a file in our required directory, it takes two arguments 
+1.  a path
+2. a optional callback when we create the file
+
+* remaining things about the file system module is 
+1. **Synchronousy**
+2. **Asychronousy**
+
+* **Synchronousy**: synchronousy means the code will be executed from start to bottom. and here there are no callbacks here. it blocks event loop.
+* **Asynchronousy**: lets say there are two tasks that are to be done sequentially. first task takes 1 second and second task takes half a second.
+ * according to synchronousy it executes tasks sequentially, now coming to asynchronousy it will first execute small task first not because it is small, but because first thing will take time so optimize it. it will execute the second task.
+* To clear this once execute the both synchronous and asynchrnous tasks simultaneously to check the what magic is happening.
+
+**Some other methods in file system module**:
+1. **fs.rename(old path, newpath, optional callback)**: this is used to rename a file
+2. **fs.readdir(path, optional callback)**: this returns the contents of a directory
